@@ -9,5 +9,5 @@ class Student extends Model
 {
     use HasFactory;
     protected $table = "Student";
-    protected $fillabele = ['id','name','code','career','state','created_at','updated_at'];
+    protected $fillabele = ['id','name','code','state','created_at','updated_at'];
 }

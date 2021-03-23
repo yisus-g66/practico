@@ -4,13 +4,18 @@ namespace App\Http\Controllers;
 use App\Models\Career;
 use Illuminate\Http\Request;
 use App\Models\Student;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
     //principal
     public function index()
     {
-        return View('student.index');
+        $student = DB::table('Student')
+        ->select('*')
+        ->where('State','=','1')
+        ->paginate(5);
+        return view('Student/index',compact('student'));
     }
     //formulario de creación
     public function create()
@@ -23,10 +28,21 @@ class StudentController extends Controller
 
     }
     //acción de almacenar nuevo registro
-    public function store()
+    public function store(Request $request)
     {
-        return View('student.index');
+        // return $request->all();
+        $request->validate([
+            'name' => 'required',
+            'code' =>'required',
+        ]);
+        $estudiante = new Student();
+        $estudiante->name = $request->name;
+        $estudiante->code = $request->code;
+        // dd($estudiante);
+        $estudiante->save();
+        return redirect()->route('student.index', $estudiante);
     }
+
     //mostrar estudiante por ID
     public function show($student)
     {
