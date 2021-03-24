@@ -7,7 +7,8 @@
             <tr>
                 <th>Nombre</th>
                 <th>Codigo Alumno</th>
-                <th>Fecha Creación</th>
+                <th>Fecha de Creación</th>
+                <th>Fecha de Modificación</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -17,6 +18,7 @@
         <td> {{$cr->name}}</td>
         <td>{{$cr->code}}</td>
         <td>{{$cr->created_at}}</td>
+        <td>{{$cr->updated_at}}</td>
         <td><a href="{{ route('student.edit', $cr->id) }}"><i title="Editar"
             class="fa fa-edit icon"></i></a>
 </td>
