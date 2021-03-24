@@ -1,7 +1,6 @@
 @extends('welcome')
 @section('title', 'Lista Estudiante')
 @section('contenido')
-
     <h1>Lista Estudiantes</h1>
     <table style="text-align: center" class="table table-bordered table-hover table-responsive-xl">
         <thead class="thead-dark">
@@ -9,6 +8,7 @@
                 <th>Nombre</th>
                 <th>Codigo Alumno</th>
                 <th>Fecha Creación</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -17,6 +17,9 @@
         <td> {{$cr->name}}</td>
         <td>{{$cr->code}}</td>
         <td>{{$cr->created_at}}</td>
+        <td><a href="{{ route('student.edit', $cr->id) }}"><i title="Editar"
+            class="fa fa-edit icon"></i></a>
+</td>
     </tr>
     @endforeach
     </tbody>
