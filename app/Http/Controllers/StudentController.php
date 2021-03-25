@@ -24,7 +24,7 @@ class StudentController extends Controller
         // return $todos['admin'];
         // dd($career);
         return view('Student.create', compact('career'));
-        // return view('estudiante.create');
+        // return view('student.create');
 
     }
     //acción de almacenar nuevo registro
@@ -32,20 +32,19 @@ class StudentController extends Controller
     {
         // return $request->all();
         $request->validate([
-            'name' => 'required',
-            'code' =>'required',
+            'name' => 'required|unique:Student,name',
+            'code' =>'required|unique:Student,code',
             'Career_Id'=> 'required',
         ]);
-        $estudiante = new Student();
-        $estudiante->name = ucwords(strtolower($request->name));
-        $estudiante->code = ucwords(strtoupper($request->code));
-        $estudiante->Career_Id = $request->Career_Id;
-        // dd($estudiante);
-        $estudiante->save();
-        return redirect()->route('student.index', $estudiante);
+        $student = new Student();
+        $student->name = ucwords(strtolower($request->name));
+        $student->code = ucwords(strtoupper($request->code));
+        $student->Career_Id = $request->Career_Id;
+        $student->save();
+        return redirect()->route('student.index');
     }
 
-    //mostrar estudiante por ID
+    //mostrar student por ID
     public function show($student)
     {
         return View('student.show');
@@ -69,7 +68,7 @@ class StudentController extends Controller
         return view('Student.edit', compact('student','career','careerReal'));
 
     }
-    //acción de almacenar modificación de estudiante
+    //acción de almacenar modificación de student
     public function update(Request $request, Student $student)
     {
         $request->validate([
@@ -83,7 +82,7 @@ class StudentController extends Controller
         $student->save();
         return redirect()->route('student.index');
     }
-    //acción de eliminación de estudiante por ID
+    //acción de eliminación de student por ID
     public function destroy($student)
     {
         return View('student.index');
